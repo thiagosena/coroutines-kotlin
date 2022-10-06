@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 data class Comment(
     @Id
-    private val id: String? = null,
-    private val content: String,
-    private val postId: String
+    val id: String? = null,
+    val content: String,
+    val postId: String
 )

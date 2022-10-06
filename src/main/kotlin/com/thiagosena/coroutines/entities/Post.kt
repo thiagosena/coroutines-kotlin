@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 data class Post(
     @Id
-    private val id: String? = null,
-    private val title: String,
-    private val content: String
+    val id: String? = null,
+    val title: String,
+    val content: String
 )
