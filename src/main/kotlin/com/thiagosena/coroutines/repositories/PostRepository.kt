@@ -33,9 +33,9 @@ class PostRepository(private val mongo: ReactiveFluentMongoOperations) {
 
     suspend fun deleteAll(): Long = mongo.remove<Post>().allAndAwait().deletedCount
 
-    suspend fun save(post: Post) = mongo.insert<Post>().oneAndAwait(post)
+    suspend fun save(post: Post): Post = mongo.insert<Post>().oneAndAwait(post)
 
-    suspend fun update(post: Post) = mongo.update<Post>()
+    suspend fun update(post: Post): Post = mongo.update<Post>()
         .replaceWith(post)
         .asType<Post>()
         .findReplaceAndAwait()
