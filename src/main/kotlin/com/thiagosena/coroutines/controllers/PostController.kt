@@ -5,6 +5,7 @@ import com.thiagosena.coroutines.services.PostService
 import kotlinx.coroutines.flow.Flow
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,6 +23,9 @@ class PostController(
 
     @GetMapping("count")
     suspend fun count(): Long = postService.count()
+
+    @GetMapping("{id}")
+    suspend fun findOne(@PathVariable id: String): Post = postService.findOne(id)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

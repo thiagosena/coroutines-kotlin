@@ -1,6 +1,7 @@
 package com.thiagosena.coroutines.services.impl
 
 import com.thiagosena.coroutines.entities.Post
+import com.thiagosena.coroutines.exceptions.PostNotFoundException
 import com.thiagosena.coroutines.repositories.PostRepository
 import com.thiagosena.coroutines.services.PostService
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,7 @@ class PostServiceImpl(
 
     override fun findAll(): Flow<Post> = postRepository.findAll()
 
-    override suspend fun findOne(id: String): Post? = postRepository.findOne(id)
+    override suspend fun findOne(id: String): Post = postRepository.findOne(id) ?: throw PostNotFoundException(id)
 
     override suspend fun deleteAll(): Long = postRepository.deleteAll()
 
