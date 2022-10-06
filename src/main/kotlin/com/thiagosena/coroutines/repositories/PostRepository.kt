@@ -6,7 +6,7 @@ import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations
 import org.springframework.data.mongodb.core.allAndAwait
 import org.springframework.data.mongodb.core.asType
-import org.springframework.data.mongodb.core.awaitOne
+import org.springframework.data.mongodb.core.awaitOneOrNull
 import org.springframework.data.mongodb.core.findReplaceAndAwait
 import org.springframework.data.mongodb.core.flow
 import org.springframework.data.mongodb.core.insert
@@ -29,7 +29,7 @@ class PostRepository(private val mongo: ReactiveFluentMongoOperations) {
     suspend fun findOne(id: String): Post? = mongo.query<Post>()
         .matching(
             query(where("id").isEqualTo(id))
-        ).awaitOne()
+        ).awaitOneOrNull()
 
     suspend fun deleteAll(): Long = mongo.remove<Post>().allAndAwait().deletedCount
 
