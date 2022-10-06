@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class CommentRepository(private val mongo: ReactiveFluentMongoOperations) {
 
-    suspend fun save(comment: Comment) = mongo.insert<Comment>().oneAndAwait(comment)
+    suspend fun save(comment: Comment): Comment = mongo.insert<Comment>().oneAndAwait(comment)
 
     suspend fun countByPostId(postId: String): Long = mongo.query<Comment>()
         .matching(query(where("postId").isEqualTo(postId)))
